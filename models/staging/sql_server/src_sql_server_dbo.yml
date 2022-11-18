@@ -1,67 +1,180 @@
 version: 2
 
 sources:
-
-  - name: sql_server # name of the source 
-    description: >
-      Raw data for events demo from SQL_Server Database.
-    schema: sql_server_dbo # this is the schema our raw data lives in
-    database: dev_bronze_db_alumno12 # this is the name of our database
-
-    quoting:
-      database: false
-      schema: false
-      identifier: false
-
-    freshness:
-      warn_after: {count: 24, period: hour}
-      error_after: {count: 48, period: hour}
-
+  - name: sql_server_dbo
+    description: ""
+    database: dev_bronze_db_alumno12
     tables:
+      - name: addresses
+        description: ""
+        columns:
+          - name: address_id
+            description: ""
+          - name: zipcode
+            description: ""
+          - name: address
+            description: ""
+          - name: country
+            description: ""
+          - name: state
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
 
       - name: events
-        description: >
-          Data about events in the platform of demo.
+        description: ""
         columns:
           - name: event_id
-            description: >
-              UUID of each unique event on the platform.
-            tests:
-              - not_null
-              - unique
-          - name: session_id
-            description: >
-              UUID of each browsing session on the platform which can contain many events.
-            tests:
-              - not_null
+            description: ""
           - name: user_id
-            description: >
-              UUID of the user that this event is associated with.
-            tests:
-              - not_null
+            description: ""
           - name: page_url
-            description: >
-              URL that the event happened on.
-            tests:
-              - not_null
-          - name: created_at
-            description: >
-              Timestamp of the event (UTC).
-            tests:
-              - not_null
+            description: ""
           - name: event_type
-            description: >
-              Type of event.
-            tests:
-              - not_null
+            description: ""
           - name: order_id
-            description: >
-              If the event is specific to an order (mostly used for checkout).
+            description: ""
           - name: product_id
-            description: >
-              If the event is specific to a product.
+            description: ""
+          - name: session_id
+            description: ""
+          - name: created_at
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
           - name: _fivetran_synced
-            description: >
-              Date that the data was loaded.
-            tests:
-              - not_null
+            description: ""
+
+      - name: fivetran_audit
+        description: ""
+        columns:
+          - name: id
+            description: ""
+          - name: message
+            description: ""
+          - name: update_started
+            description: ""
+          - name: update_id
+            description: ""
+          - name: schema
+            description: ""
+          - name: table
+            description: ""
+          - name: start
+            description: ""
+          - name: done
+            description: ""
+          - name: rows_updated_or_inserted
+            description: ""
+          - name: status
+            description: ""
+          - name: progress
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: order_items
+        description: ""
+        columns:
+          - name: order_id
+            description: ""
+          - name: product_id
+            description: ""
+          - name: quantity
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: orders
+        description: ""
+        columns:
+          - name: order_id
+            description: ""
+          - name: shipping_service
+            description: ""
+          - name: promo_id
+            description: ""
+          - name: order_cost
+            description: ""
+          - name: delivered_at
+            description: ""
+          - name: tracking_id
+            description: ""
+          - name: estimated_delivery_at
+            description: ""
+          - name: user_id
+            description: ""
+          - name: shipping_cost
+            description: ""
+          - name: created_at
+            description: ""
+          - name: order_total
+            description: ""
+          - name: status
+            description: ""
+          - name: address_id
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: products
+        description: ""
+        columns:
+          - name: product_id
+            description: ""
+          - name: price
+            description: ""
+          - name: name
+            description: ""
+          - name: inventory
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: promos
+        description: ""
+        columns:
+          - name: promo_id
+            description: ""
+          - name: status
+            description: ""
+          - name: discount
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: users
+        description: ""
+        columns:
+          - name: user_id
+            description: ""
+          - name: total_orders
+            description: ""
+          - name: email
+            description: ""
+          - name: address_id
+            description: ""
+          - name: created_at
+            description: ""
+          - name: last_name
+            description: ""
+          - name: phone_number
+            description: ""
+          - name: first_name
+            description: ""
+          - name: updated_at
+            description: ""
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
