@@ -13,4 +13,14 @@ renamed_casted AS (
     FROM src_order_items
     )
 
-SELECT * FROM renamed_casted
+SELECT 
+
+     {{ dbt_utils.surrogate_key(['order_id','product_id'])
+    }} as order_items_id
+    ,ORDER_ID
+    ,PRODUCT_ID
+    ,CANTIDAD
+    ,_fivetran_deleted
+    ,_fivetran_synced
+
+ from renamed_casted
