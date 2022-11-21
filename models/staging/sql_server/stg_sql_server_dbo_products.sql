@@ -7,7 +7,7 @@ renamed_casted AS (
     SELECT
          PRODUCT_ID
         ,PRICE as Precio_$
-        ,NAME as NOMBRE
+        ,NAME as NOMBRE_PRODUCTO
         ,INVENTORY NUMBER
         ,_fivetran_deleted
         ,_fivetran_synced

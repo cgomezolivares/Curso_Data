@@ -7,7 +7,7 @@ renamed_casted AS (
     SELECT
          ORDER_ID
         ,PRODUCT_ID
-        ,QUANTITY NUMBER
+        ,QUANTITY AS CANTIDAD
         ,_fivetran_deleted
         ,_fivetran_synced
     FROM src_order_items

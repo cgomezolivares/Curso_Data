@@ -9,8 +9,8 @@ renamed_casted AS (
         ,EMAIL
         ,ADDRESS_ID
         ,CREATED_AT
-        ,FIRST_NAME
-        ,LAST_NAME 
+        ,FIRST_NAME AS NOMBRE
+        ,LAST_NAME AS APELLIDO
         ,PHONE_NUMBER
         ,UPDATED_AT 
         ,_fivetran_deleted

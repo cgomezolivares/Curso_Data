@@ -6,8 +6,8 @@ WITH src_promos AS (
 renamed_casted AS (
     SELECT
         PROMO_ID
-	    ,STATUS
-	    ,DISCOUNT AS DISCOUNT_$
+	    ,STATUS AS ESTADO
+	    ,DISCOUNT AS DESCUENTO_$
         ,_fivetran_deleted
         ,_fivetran_synced
     FROM src_promos
