@@ -8,11 +8,11 @@ renamed_casted AS (
          USER_ID
         ,EMAIL
         ,ADDRESS_ID
-        ,CREATED_AT TIMESTAMP_NTZ
+        ,CREATED_AT
         ,FIRST_NAME
         ,LAST_NAME 
         ,PHONE_NUMBER
-        ,UPDATED_AT TIMESTAMP_NTZ
+        ,UPDATED_AT 
         ,_fivetran_deleted
         ,_fivetran_synced
     FROM src_users

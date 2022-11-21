@@ -20,7 +20,7 @@ renamed_casted AS (
         ,_fivetran_deleted
         ,_fivetran_synced
     FROM src_orders
+    WHERE ESTIMATED_DELIVERY_AT is not null
     )
-   -- WHERE ESTIMATED_DELIVERY_AT <> 'NULL'
 
 SELECT * FROM renamed_casted
