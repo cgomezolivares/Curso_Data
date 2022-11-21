@@ -9,26 +9,26 @@ sources:
         description: ""
         columns:
           - name: address_id
-            description: ""
+            description: "ID de la dirección"
             tests:
               - not_null
               - unique
           - name: zipcode
-            description: ""
+            description: "Codio postal"
             tests:
               - not_null
             tests:
               - not_null
           - name: address
-            description: ""
+            description: "Dirección"
             tests:
               - not_null
           - name: country
-            description: ""
+            description: "País"
             tests:
               - not_null
           - name: state
-            description: ""
+            description: "Estado"
             tests:
               - not_null
           - name: _fivetran_deleted
@@ -46,44 +46,44 @@ sources:
         columns:
           - name: event_id
             description: >
-              UUID of each unique event on the platform.
+              ID de cada evento
             tests:
               - not_null
               - unique
           - name: session_id
             description: >
-              UUID of each browsing session on the platform which can contain many events.
+              ID de cada sesión
             tests:
               - not_null
           - name: user_id
             description: >
-              UUID of the user that this event is associated with.
+              ID del usuario
             tests:
               - not_null
           - name: page_url
             description: >
-              URL that the event happened on.
+              URL en la que ocurrió el evento
             tests:
               - not_null
           - name: created_at
             description: >
-              Timestamp of the event (UTC).
+              Fecha y hora del evento (UTC).
             tests:
               - not_null
           - name: event_type
             description: >
-              Type of event.
+              Tipo de evento
             tests:
               - not_null
           - name: order_id
             description: >
-              If the event is specific to an order (mostly used for checkout).
+              Si el evento pertenece a una orden concreta.
           - name: product_id
             description: >
-              If the event is specific to a product.
+              Si el evento está relacionado con un producto.
           - name: _fivetran_synced
             description: >
-              Date that the data was loaded.
+              Fecha en la que fue cargada la información.
             tests:
               - not_null
 
