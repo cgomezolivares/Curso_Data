@@ -1,0 +1,310 @@
+version: 2
+
+sources:
+  - name: sql_server_dbo
+    description: ""
+    database: dev_bronze_db_alumno12
+    tables:
+      - name: addresses
+        description: ""
+        columns:
+          - name: address_id
+            description: "ID de la dirección"
+            tests:
+              - not_null
+              - unique
+          - name: zipcode
+            description: "Codio postal"
+            tests:
+              - not_null
+            tests:
+              - not_null
+          - name: address
+            description: "Dirección"
+            tests:
+              - not_null
+          - name: country
+            description: "País"
+            tests:
+              - not_null
+          - name: state
+            description: "Estado"
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_synced
+            description: ""
+            tests:
+              - not_null
+
+      - name: events
+        description: >
+          Data about events in the platform of demo.
+        columns:
+          - name: event_id
+            description: >
+              ID de cada evento
+            tests:
+              - not_null
+              - unique
+          - name: session_id
+            description: >
+              ID de cada sesión
+            tests:
+              - not_null
+          - name: user_id
+            description: >
+              ID del usuario
+            tests:
+              - not_null
+          - name: page_url
+            description: >
+              URL en la que ocurrió el evento
+            tests:
+              - not_null
+          - name: created_at
+            description: >
+              Fecha y hora del evento (UTC).
+            tests:
+              - not_null
+          - name: event_type
+            description: >
+              Tipo de evento
+            tests:
+              - not_null
+          - name: order_id
+            description: >
+              Si el evento pertenece a una orden concreta.
+          - name: product_id
+            description: >
+              Si el evento está relacionado con un producto.
+          - name: _fivetran_synced
+            description: >
+              Fecha en la que fue cargada la información.
+            tests:
+              - not_null
+
+
+      - name: fivetran_audit
+        description: ""
+        columns:
+          - name: id
+            description: ""
+            tests:
+              - not_null
+              - unique
+          - name: message
+            description: ""
+          - name: update_started
+            description: ""
+          - name: update_id
+            description: ""
+          - name: schema
+            description: ""
+          - name: table
+            description: ""
+          - name: start
+            description: ""
+          - name: done
+            description: ""
+          - name: rows_updated_or_inserted
+            description: ""
+          - name: status
+            description: ""
+          - name: progress
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: order_items
+        description: ""
+        columns:
+          - name: order_id
+            description: ""
+            tests:
+              - not_null
+          - name: product_id
+            description: ""
+            tests:
+              - not_null
+          - name: quantity
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: orders
+        description: ""
+        columns:
+          - name: order_id
+            description: ""
+            tests:
+              - not_null
+              - unique
+          - name: shipping_service
+            description: ""
+            tests:
+              - not_null
+          - name: promo_id
+            description: ""
+            tests:
+              - not_null
+
+          - name: order_cost
+            description: ""
+            tests:
+              - not_null
+
+          - name: delivered_at
+            description: ""
+
+          - name: tracking_id
+            description: ""
+            tests:
+              - not_null
+
+          - name: estimated_delivery_at
+            description: ""
+            tests:
+              - not_null
+
+          - name: user_id
+            description: ""
+            tests:
+              - not_null
+
+          - name: shipping_cost
+            description: ""
+            tests:
+              - not_null
+
+          - name: created_at
+            description: ""
+            tests:
+              - not_null
+              
+          - name: order_total
+            description: ""
+            tests:
+              - not_null
+          - name: status
+            description: ""
+            tests:
+              - not_null
+
+
+          - name: address_id
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+          - name: _fivetran_synced
+            description: ""
+
+      - name: products
+        description: ""
+        columns:
+          - name: product_id
+            description: ""
+            tests:
+              - not_null
+              - unique
+          - name: price
+            description: ""
+            tests:
+              - not_null
+          - name: name
+            description: ""
+            tests:
+              - not_null
+          - name: inventory
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_synced
+            description: ""
+            tests:
+              - not_null
+
+      - name: promos
+        description: ""
+        columns:
+          - name: promo_id
+            description: ""
+            tests:
+              - not_null
+          - name: status
+            description: ""
+            tests:
+              - not_null
+          - name: discount
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_synced
+            description: ""
+            tests:
+              - not_null
+
+      - name: users
+        description: ""
+        columns:
+          - name: user_id
+            description: ""
+            tests:
+              - not_null
+              - unique
+          - name: total_orders
+            description: ""
+
+          - name: email
+            description: ""
+            tests:
+              - not_null
+          - name: address_id
+            description: ""
+            tests:
+              - not_null
+          - name: created_at
+            description: ""
+            tests:
+              - not_null
+          - name: last_name
+            description: ""
+            tests:
+              - not_null
+          - name: phone_number
+            description: ""
+            tests:
+              - not_null
+          - name: first_name
+            description: ""
+            tests:
+              - not_null
+          - name: updated_at
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_deleted
+            description: ""
+            tests:
+              - not_null
+          - name: _fivetran_synced
+            description: ""
+            tests:
+              - not_null
