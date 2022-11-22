@@ -6,9 +6,9 @@ WITH src_addresses AS (
 renamed_casted AS (
     SELECT
          ADDRESS_ID
-        ,ZIPCODE as CODIGO POSTAL
+        ,ZIPCODE as CODIGO_POSTAL
         ,ADDRESS AS DIRECCION
-        ,COUNTRY AS PAÍS
+        ,COUNTRY AS PAIS
         ,STATE AS ESTADO
         ,_fivetran_deleted
         ,_fivetran_synced
