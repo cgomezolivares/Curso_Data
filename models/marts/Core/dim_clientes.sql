@@ -5,7 +5,8 @@
   )
 }}
 WITH dim_user AS (SELECT * FROM {{ ref('stg_sql_server_dbo_users') }})
-    , dim_addresses as (SELECT * FROM {{ ref('stg_sql_server_dbo_addresses') }} ),
+    , dim_addresses as (SELECT * FROM {{ ref('stg_sql_server_dbo_addresses') }} )
+    ,
 
 joined AS (   
     SELECT

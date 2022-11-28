@@ -6,7 +6,7 @@ WITH src_products AS (
 renamed_casted AS (
     SELECT
          PRODUCT_ID
-        ,PRICE as Precio_$
+        ,PRICE as Precio_usd
         ,NAME as NOMBRE_PRODUCTO
         ,INVENTORY NUMBER
         ,_fivetran_deleted
