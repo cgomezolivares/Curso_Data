@@ -8,13 +8,13 @@ renamed_casted AS (
          ORDER_ID
         ,SHIPPING_SERVICE AS SERVICIO_ENVIO
         ,PROMO_ID
-        ,ORDER_COST AS ORDER_COST_$
+        ,ORDER_COST AS ORDER_COST_usd
         ,TRACKING_ID
         ,ESTIMATED_DELIVERY_AT 
         ,USER_ID
-        ,SHIPPING_COST AS SHIPPING_COST_$
+        ,SHIPPING_COST AS SHIPPING_COST_usd
         ,CREATED_AT 
-        ,ORDER_TOTAL AS ORDER_TOTAL_$
+        ,ORDER_TOTAL AS ORDER_TOTAL_usd
         ,STATUS
         ,ADDRESS_ID
         ,_fivetran_deleted
