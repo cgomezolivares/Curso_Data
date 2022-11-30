@@ -1,11 +1,11 @@
 
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
-WITH dim_user AS (SELECT * FROM {{ ref('stg_sql_server_dbo_users') }})
-    , dim_addresses as (SELECT * FROM {{ ref('stg_sql_server_dbo_addresses') }} )
+WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
+    , dim_addresses as (SELECT * FROM {{ ref('dim_addresses') }} )
     ,
 
 joined AS (   
@@ -14,12 +14,13 @@ joined AS (
         , a.NOMBRE
         , a.APELLIDO
         , b.DIRECCION
+        , b.CODIGO_POSTAL
         , b.ESTADO
         , b.PAIS
         , a.EMAIL
-        , a.PHONE_NUMBER as TELEFONO
-        , a.CREATED_AT AS FECHA_CREACION
-        , a.UPDATED_AT 
+        , a.TELEFONO
+        , a.FECHA_CREACION
+        , a.ULTIMA_ACTUALIZACION
 
     FROM dim_user a
     inner join dim_addresses B

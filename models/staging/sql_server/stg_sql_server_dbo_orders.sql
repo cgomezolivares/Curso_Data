@@ -8,14 +8,14 @@ renamed_casted AS (
          ORDER_ID
         ,SHIPPING_SERVICE AS SERVICIO_ENVIO
         ,PROMO_ID
-        ,ORDER_COST AS ORDER_COST_usd
+        ,ORDER_COST AS COSTE_PEDIDO_usd
         ,TRACKING_ID
-        ,ESTIMATED_DELIVERY_AT 
-        ,USER_ID
-        ,SHIPPING_COST AS SHIPPING_COST_usd
-        ,CREATED_AT 
-        ,ORDER_TOTAL AS ORDER_TOTAL_usd
-        ,STATUS
+        ,ESTIMATED_DELIVERY_AT as FECHA_ENVIO_ESTIMADA_utc
+        ,USER_ID 
+        ,SHIPPING_COST AS COSTE_ENVIO_usd
+        ,CREATED_AT AS FECHA_PEDIDO_utc
+        ,ORDER_TOTAL AS COSTE_TOTAL_usd
+        ,STATUS as ESTADO_PEDIDO
         ,ADDRESS_ID
         ,_fivetran_deleted
         ,_fivetran_synced
