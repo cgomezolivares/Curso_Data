@@ -14,6 +14,7 @@ joined AS (
         , a.NOMBRE
         , a.APELLIDO
         , b.DIRECCION
+        , b.CIUDAD
         , b.CODIGO_POSTAL
         , b.ESTADO
         , b.PAIS

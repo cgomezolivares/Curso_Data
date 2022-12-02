@@ -13,7 +13,6 @@ WITH src_city AS (
 renamed_casted AS (
     SELECT
           ZIP AS Codigo_postal
-        , ZIPCODE_NAME AS Ciudad_Est
         , State as Estado
         , City as Ciudad
         , County_name as Condado
@@ -22,3 +21,4 @@ renamed_casted AS (
     )
 
 SELECT * FROM renamed_casted
+/* algunos condados y ciudad_est son vacios pero no influyen porque no se van a utilizar esas columnas */ 

@@ -7,13 +7,14 @@
 WITH dim_user AS (SELECT * FROM {{ ref('dim_clientes') }})
     , dim_order as (SELECT * FROM {{ ref('stg_sql_server_dbo_orders') }} )
     , dim_order_items as (SELECT * FROM {{ ref('int_order_items') }})
-    , dim_product as (SELECT * FROM {{ ref('stg_sql_server_dbo_products') }})
+    , dim_product as (SELECT * FROM {{ ref('dim_products') }})
     ,
 
 joined AS (   
   SELECT
         a.order_id
-        , b.USER_ID
+        , a.USER_ID
+        , b.CIUDAD
         , b.ESTADO
         , c.PRODUCT_ID
         , c.cantidad

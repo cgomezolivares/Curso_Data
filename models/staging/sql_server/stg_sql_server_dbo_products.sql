@@ -8,9 +8,9 @@ renamed_casted AS (
          PRODUCT_ID
         ,PRICE as Precio_usd
         ,NAME as NOMBRE_PRODUCTO
-        ,INVENTORY NUMBER
-        ,_fivetran_deleted
-        ,_fivetran_synced
+        ,INVENTORY AS NUM_INVENTARIO
+        ,_fivetran_deleted 
+        ,_fivetran_synced AS date_load
     FROM src_products
     )
 
