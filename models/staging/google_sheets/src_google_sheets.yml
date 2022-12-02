@@ -55,3 +55,35 @@ sources:
               Date on which data were uploaded.
             tests:
               - not_null
+
+      - name: cities
+        loaded_at_field: _fivetran_synced
+        description: >
+          Ciudades y sus codigos postales
+        columns:
+          - name: ZIP
+            description: "Codigo Postal"
+            tests:
+              - not_null
+              - unique
+          - name: zipcode_name
+            description: "Ciudad, Estado."
+            tests:
+              - not_null
+          - name: state
+            description: "Estado (abreviado)"
+            tests:
+              - not_null
+          - name: CITY
+            description: "Nombre de la ciudad"
+            tests:
+              - not_null
+          - name: County_name
+            description: "Nombre del Condado"
+            tests:
+              - not_null
+
+          - name: _fivetran_synced
+            description: "fecha sincronizacion"
+            tests:
+              - not_null

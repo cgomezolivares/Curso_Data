@@ -18,7 +18,7 @@ renamed_casted AS (
         ,STATUS as ESTADO_PEDIDO
         ,ADDRESS_ID
         ,_fivetran_deleted
-        ,_fivetran_synced
+        ,_fivetran_synced as date_load
     FROM src_orders
     WHERE ESTIMATED_DELIVERY_AT is not null 
     )
