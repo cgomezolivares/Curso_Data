@@ -5,13 +5,22 @@ WITH src_addresses AS (
 
 renamed_casted AS (
     SELECT
-         ADDRESS_ID
-        ,ZIPCODE as CODIGO_POSTAL
-        ,ADDRESS AS DIRECCION
-        ,COUNTRY AS PAIS
-        ,STATE AS ESTADO
+        --id
+        md5(ADDRESS_ID) AS ADDRESS_ID
+        ,TRIM(ADDRESS_ID) AS NATURAL_ADDRESS_ID
+
+        -- strings 
+        ,TRIM(ADDRESS) AS DIRECCION
+        ,TRIM(COUNTRY) AS PAIS
+        ,TRIM(STATE) AS ESTADO
+
+        -- number
+        ,CAST (ZIPCODE AS NUMBER (38,2))as CODIGO_POSTAL
+        
+        -- timestamps
         ,_fivetran_deleted
-        ,_fivetran_synced
+        ,_fivetran_synced as date_load
+
     FROM src_addresses
     )
 

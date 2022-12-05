@@ -9,6 +9,7 @@ WITH dim_products AS (SELECT * FROM {{ ref('stg_sql_server_dbo_products') }})
 gold_products AS (   
    SELECT
          product_id
+        ,natural_product_id
         ,Precio_usd
         ,nombre_producto
         ,num_inventario

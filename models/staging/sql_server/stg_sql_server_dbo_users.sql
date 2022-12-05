@@ -5,16 +5,17 @@ WITH src_users AS (
 
 renamed_casted AS (
     SELECT
-         USER_ID
-        ,EMAIL
-        ,ADDRESS_ID
-        ,CREATED_AT AS FECHA_CREACION
-        ,FIRST_NAME AS NOMBRE
-        ,LAST_NAME AS APELLIDO
+         md5(USER_ID) as user_id
+        ,trim(user_id) as natural_user_id
+        ,md5(ADDRESS_ID) as ADDRESS_ID
+        ,trim(FIRST_NAME) AS NOMBRE
+        ,trim(LAST_NAME) AS APELLIDO
         ,PHONE_NUMBER AS TELEFONO
+        ,trim(EMAIL) as email
         ,UPDATED_AT AS ULTIMA_ACTUALIZACION
+        ,CREATED_AT AS FECHA_CREACION
         ,_fivetran_deleted
-        ,_fivetran_synced
+        ,_fivetran_synced as date_load
     FROM src_users
     )
 

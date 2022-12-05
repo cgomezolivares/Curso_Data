@@ -5,11 +5,14 @@ WITH src_order_items AS (
 
 renamed_casted AS (
     SELECT
-         ORDER_ID
-        ,PRODUCT_ID
-        ,QUANTITY AS CANTIDAD
+        -- ids
+         md5(ORDER_ID) as order_id
+        ,md5(PRODUCT_ID) as product_id
+        -- strings
+        ,cast(QUANTITY as number(38,2)) AS CANTIDAD
+        --timestamps
         ,_fivetran_deleted
-        ,_fivetran_synced
+        ,_fivetran_synced as date_load
     FROM src_order_items
     )
 
@@ -21,6 +24,6 @@ SELECT
     ,PRODUCT_ID
     ,CANTIDAD
     ,_fivetran_deleted
-    ,_fivetran_synced
+    ,date_load
 
  from renamed_casted

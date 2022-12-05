@@ -5,9 +5,10 @@ WITH src_products AS (
 
 renamed_casted AS (
     SELECT
-         PRODUCT_ID
-        ,PRICE as Precio_usd
-        ,NAME as NOMBRE_PRODUCTO
+         md5(PRODUCT_ID) as product_id
+        ,trim(product_id) as natural_product_id
+        ,trim(NAME) as NOMBRE_PRODUCTO
+        ,cast(PRICE as number(38,2)) as Precio_usd
         ,INVENTORY AS NUM_INVENTARIO
         ,_fivetran_deleted 
         ,_fivetran_synced AS date_load

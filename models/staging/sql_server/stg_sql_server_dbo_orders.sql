@@ -5,18 +5,23 @@ WITH src_orders AS (
 
 renamed_casted AS (
     SELECT
-         ORDER_ID
-        ,SHIPPING_SERVICE AS SERVICIO_ENVIO
-        ,PROMO_ID
-        ,ORDER_COST AS COSTE_PEDIDO_usd
-        ,TRACKING_ID
-        ,ESTIMATED_DELIVERY_AT as FECHA_ENVIO_ESTIMADA_utc
-        ,USER_ID 
-        ,SHIPPING_COST AS COSTE_ENVIO_usd
-        ,CREATED_AT AS FECHA_PEDIDO_utc
-        ,ORDER_TOTAL AS COSTE_TOTAL_usd
-        ,STATUS as ESTADO_PEDIDO
-        ,ADDRESS_ID
+        --ids
+         md5(ORDER_ID) as order_id
+        ,TRIM(order_id) as natural_order_id
+        ,md5(USER_ID) as user_id
+        ,md5(ADDRESS_ID) as address_id
+        ,md5(PROMO_ID) as promo_id
+        ,md5(TRACKING_ID) as TRACKING_ID
+        --strings
+        ,trim(SHIPPING_SERVICE) AS servicio_envio
+        ,trim(STATUS) as ESTADO_PEDIDO
+        --number
+        ,cast(ORDER_COST as number(38,2)) AS coste_pedido_usd
+        ,cast(SHIPPING_COST as number(38,2)) AS COSTE_ENVIO_usd
+        ,cast(ORDER_TOTAL as number(38,2)) AS COSTE_TOTAL_usd
+        -- timestamps
+        ,CREATED_AT AS fecha_pedido_utc
+        ,ESTIMATED_DELIVERY_AT as fecha_envio_estimada_utc
         ,_fivetran_deleted
         ,_fivetran_synced as date_load
     FROM src_orders

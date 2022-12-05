@@ -13,7 +13,8 @@ WITH src_budget_products AS (
 renamed_casted AS (
     SELECT
           _row
-        , product_id
+        , product_id as natural_product_id
+        , md5(product_id) as product_id
         , quantity
         , month
         , _fivetran_synced AS date_load

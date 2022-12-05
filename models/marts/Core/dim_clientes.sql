@@ -11,6 +11,7 @@ WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
 joined AS (   
     SELECT
           a.USER_ID
+        , a.NATURAL_USER_ID
         , a.NOMBRE
         , a.APELLIDO
         , b.DIRECCION

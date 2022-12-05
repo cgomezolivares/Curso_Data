@@ -5,11 +5,12 @@ WITH src_promos AS (
 
 renamed_casted AS (
     SELECT
-        PROMO_ID
-	    ,STATUS AS ESTADO_PROMO
-	    ,DISCOUNT AS DESCUENTO_usd
+        md5(PROMO_ID) as promo_id
+        ,trim(promo_id) as natural_promo_id
+	    ,trim(STATUS) AS estado_promo
+	    ,cast(DISCOUNT as number(38,2)) AS descuento_usd
         ,_fivetran_deleted
-        ,_fivetran_synced
+        ,_fivetran_synced as date_load
     FROM src_promos
     )
 
