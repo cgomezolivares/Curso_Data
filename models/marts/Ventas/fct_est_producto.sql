@@ -4,7 +4,8 @@
     materialized='table'
   )
 }}
-WITH dim_user AS (SELECT * FROM {{ ref('dim_clientes') }})
+WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
+    , dim_address AS (SELECT * FROM {{ ref('dim_addresses') }})
     , dim_order as (SELECT * FROM {{ ref('stg_sql_server_dbo_orders') }} )
     , dim_order_items as (SELECT * FROM {{ ref('int_order_items') }})
     , dim_product as (SELECT * FROM {{ ref('dim_products') }})
@@ -14,8 +15,8 @@ joined AS (
   SELECT
         a.order_id
         , a.USER_ID
-        , b.CIUDAD
-        , b.ESTADO
+        , e.CIUDAD
+        , e.ESTADO
         , c.PRODUCT_ID
         , c.cantidad
         , c.CANTIDAD*d.Precio_usd as coste_pedido_usd
@@ -28,6 +29,8 @@ joined AS (
       on a.order_id = c.order_id
       inner join dim_product d
       on c.PRODUCT_ID=d.PRODUCT_ID
+      inner join dim_address e
+      on b.address_ID=e.address_ID
     )
 
 SELECT * FROM joined

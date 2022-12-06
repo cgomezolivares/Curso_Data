@@ -1,6 +1,8 @@
+
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key=('product_id')
   )
 }}
 WITH dim_products AS (SELECT * FROM {{ ref('stg_sql_server_dbo_products') }})
@@ -15,7 +17,14 @@ gold_products AS (
         ,num_inventario
         ,_fivetran_deleted 
         ,date_load
-    FROM dim_products 
-    )
+    FROM dim_products
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where date_load >= (select max(date_load) from {{ this }})
+
+{% endif %}
+)
 
 SELECT * FROM gold_products

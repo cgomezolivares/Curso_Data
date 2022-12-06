@@ -1,7 +1,8 @@
 
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key=('address_id')
   )
 }}
 WITH dim_addresses as (SELECT * FROM {{ ref('stg_sql_server_dbo_addresses') }} )
@@ -22,6 +23,14 @@ DIRECCIONES AS (
     FROM  dim_addresses A
     LEFT JOIN dim_city b
     on A.CODIGO_POSTAL=B.Codigo_postal
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where date_load >= (select max(date_load) from {{ this }})
+
+{% endif %}
     )
 
 SELECT * FROM DIRECCIONES
+
