@@ -2,7 +2,8 @@
 {{
   config(
     materialized='incremental',
-    unique_key=('address_id')
+    unique_key=('address_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 WITH dim_addresses as (SELECT * FROM {{ ref('stg_sql_server_dbo_addresses') }} )

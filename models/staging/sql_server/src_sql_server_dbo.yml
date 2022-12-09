@@ -2,11 +2,11 @@ version: 2
 
 sources:
   - name: sql_server_dbo
-    description: ""
+    description: "Fuente de datos provenientes de SQL Server"
     database: dev_bronze_db_alumno12
     tables:
       - name: addresses
-        description: ""
+        description: "Tabla de direcciones"
         columns:
           - name: address_id
             description: "ID de la dirección"
@@ -120,18 +120,18 @@ sources:
             description: ""
 
       - name: order_items
-        description: ""
+        description: "tabla que relaciona pedidos y cantidad de productos en el pedido"
         columns:
           - name: order_id
-            description: ""
+            description: "id del pedido"
             tests:
               - not_null
           - name: product_id
-            description: ""
+            description: "id del producto"
             tests:
               - not_null
           - name: quantity
-            description: ""
+            description: "cantidad"
             tests:
               - not_null
           - name: _fivetran_deleted
@@ -140,67 +140,67 @@ sources:
             description: ""
 
       - name: orders
-        description: ""
+        description: "tabla de informacion sobre pedidos de la fuente"
         columns:
           - name: order_id
-            description: ""
+            description: "id del pedido"
             tests:
               - not_null
               - unique
           - name: shipping_service
-            description: ""
+            description: "servicio de envio"
             tests:
               - not_null
           - name: promo_id
-            description: ""
+            description: "id de la promocion"
             tests:
               - not_null
 
           - name: order_cost
-            description: ""
+            description: "coste de pedido"
             tests:
               - not_null
 
           - name: delivered_at
-            description: ""
+            description: "fecha de envio"
 
           - name: tracking_id
-            description: ""
+            description: "id de seguimiento"
             tests:
               - not_null
 
           - name: estimated_delivery_at
-            description: ""
+            description: "fecha de envio estimada"
             tests:
               - not_null
 
           - name: user_id
-            description: ""
+            description: "id del usuario del pedido"
             tests:
               - not_null
 
           - name: shipping_cost
-            description: ""
+            description: "coste de envio"
             tests:
               - not_null
 
           - name: created_at
-            description: ""
+            description: "fecha de creacion"
             tests:
               - not_null
               
           - name: order_total
-            description: ""
+            description: "coste total del pedido"
             tests:
               - not_null
           - name: status
-            description: ""
+            description: "Estado del pedido"
             tests:
               - not_null
 
 
           - name: address_id
-            description: ""
+            description: "id de la direccion del pedido"
             tests:
               - not_null
           - name: _fivetran_deleted

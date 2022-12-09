@@ -1,0 +1,237 @@
+version: 2
+
+models:
+  - name: dim_addresses
+    description: "Dimension sobre toda la información sobre direcciones almacenadas"
+    columns:
+      - name: natural_address_id
+        description: "ID original de la dirección"
+      - name: address_id
+        description: "ID interno de la dirección" 
+        tests:
+          - unique
+          - not_null
+
+      - name: DIRECCION
+        description: "Calle y número dirección"
+        tests:
+          - not_null
+      - name: CIUDAD
+        description: "Ciudad de la dirección"
+        tests:
+          - not_null
+      - name: ESTADO
+        description: "Estado al que pertenece la dirección"
+        tests:
+          - not_null
+      - name: PAIS
+        description: "País al que pertenece la dirección"
+        tests:
+          - not_null
+      - name: CODIGO_POSTAL
+        description: "Codigo postal al que pertenece la dirección"
+        tests:
+          - not_null
+      - name: DATE_LOAD
+        description: "Fecha en la que se actualizó y/o almacenó la dirección"
+        tests:
+          - not_null
+##############################################
+  - name: dim_users
+    description: "Dimension que contiene los datos de usuario"
+    columns:
+      - name: natural_user_id
+        description: "ID original del usuario"
+      - name: user_id
+        description: "ID interno del usuario"
+        tests:
+          - unique
+          - not_null
+      - name: NOMBRE
+        description: "Nombre de pila del usuario"
+        tests:
+          - not_null
+      - name: APELLIDO
+        description: "Apellido del usuario"
+        tests:
+          - not_null
+      - name: TELEFONO
+        description: "Numero de teléfono del usuario"
+        tests:
+          - not_null
+      - name: EMAIL
+        description: "Email del usuario"
+        tests:
+          - not_null
+      - name: ADDRESS_ID
+        description: "ID de la direccion del usuario"
+
+      - name: FECHA_CREACION
+        description: "Fecha de creación del usuario"
+        tests:
+          - not_null
+      - name: ULTIMA_ACTUALIZACION
+        description: "Ultima actualizacion del usuario"
+        tests:
+          - not_null
+      - name: DATE_LOAD
+        description: "Fecha de actualizacion del dato del usuario"
+        tests:
+          - not_null
+##################################################
+  - name: dim_promos
+    description: "Dimension que contiene datos de las promociones"
+    columns:
+      - name: natural_promo_id
+        description: "ID original de la promocion"
+
+      - name: promo_id
+        description: "ID generado interno de la promocion"
+        tests:
+          - unique
+          - not_null
+      - name: estado_promo
+        description: "Estado de la promocion"
+        tests:
+          - not_null
+      - name: descuento_usd
+        description: "Descuento en USD de la promocion"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de subida del dato de la promocion"
+        tests:
+          - not_null
+
+##################################################
+  - name: fct_orders
+    description: "Tabla de hechos que recoge la informacion de los pedidos realizados"
+    columns:
+      - name: order_id
+        description: "ID generado interno del pedido"
+        tests:
+          - unique
+          - not_null
+      - name: natural_order_id
+        description: "ID original del pedido"
+
+      - name: estado_pedido
+        description: "Estado actual del pedido"
+        tests:
+          - not_null
+
+      - name: user_id
+        description: "ID interno del usuario que realiza el pedido"
+
+      - name: address_id
+        description: "ID generado interno de la direccion a la que se realiza el pedido"
+
+      - name: coste_pedido_usd
+        description: "Coste de los productos del pedido"
+        tests:
+          - not_null
+      - name: coste_envio_usd
+        description: "Coste de envio del pedido"
+        tests:
+          - not_null
+      - name: promo_id
+        description: "ID interno de la promocion aplicada al pedido"
+
+      - name: coste_total_usd
+        description: "Suma de todos los costes y promociones del pedido"
+        tests:
+          - not_null
+      - name: fecha_pedido_utc
+        description: "Fecha en la que se realizó el pedido"
+        tests:
+          - not_null
+      - name: fecha_envio_estimada_utc
+        description: "Fecha estimada en la que llega el pedido"
+        tests:
+          - not_null
+      - name: servicio_envio
+        description: "Servicio de envio del pedido"
+        tests:
+          - not_null
+      - name: dias_envio
+        description: "Dias que se estima que tardará el envio en llegar a su direccion"
+        tests:
+          - not_null
+      - name: tracking_id
+        description: "ID de seguimiento del pedido"
+
+      - name: date_load
+        description: "Fecha de subida del dato sobre el pedido"
+        tests:
+          - not_null
+######################################################
+  - name: dim_products
+    description: "Dimension qeue contiene informacion sobre los productos"
+    columns:
+      - name: natural_product_id
+        description: "ID original del producto"
+
+      - name: product_id
+        description: "ID generaro interno del producto"
+        tests:
+          - unique
+          - not_null
+      - name: precio_usd
+        description: "Precio en USD del producto"
+        tests:
+          - not_null
+      - name: nombre_producto
+        description: "Nombre del producto"
+        tests:
+          - not_null
+      - name: num_inventario
+        description: "Stock en inventario del producto"
+        tests:
+          - not_null
+      - name: date_load
+        description: "Fecha de carga del dato del producto"
+        tests:
+          - not_null
+#####################################################################
+  - name: fct_events
+    description: "Tabla de hechos que recoge la informacion sobre cada evento ocurrido"
+    columns:
+      - name: event_id
+        description: "ID generado interno del pedido"
+
+      - name: natural_event_id
+        description: "ID original del pedido"
+
+      - name: product_id
+        description: "ID generaro interno del producto"
+        tests:
+
+      - name: user_id
+        description: "ID interno del usuario que realiza el pedido"
+
+      - name: session_id
+        description: "ID generado interno sesion de usuario del evento"
+
+      - name: order_id
+        description: "Pedido asociado a un evento"
+        tests:
+          - not_null
+      - name: page_url
+        description: "Pagina web visitada en un evento"
+        tests:
+          - not_null
+      - name: event_type
+        description: "tipo de evento asociado" 
+        tests:
+          - not_null
+        
+
+      - name: fecha_evento
+        description: "fecha en la que ocurre el evento"
+        tests:
+          - not_null
+
+      - name: date_load
+        description: "Fecha de subida del dato sobre el evento"
+        tests:
+          - not_null

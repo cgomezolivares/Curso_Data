@@ -2,7 +2,8 @@
 {{
   config(
     materialized='incremental',
-    unique_key=('product_id')
+    unique_key=('product_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 WITH dim_products AS (SELECT * FROM {{ ref('stg_sql_server_dbo_products') }})
@@ -15,7 +16,6 @@ gold_products AS (
         ,Precio_usd
         ,nombre_producto
         ,num_inventario
-        ,_fivetran_deleted 
         ,date_load
     FROM dim_products
 

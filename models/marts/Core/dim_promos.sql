@@ -1,7 +1,8 @@
 {{
   config(
     materialized='incremental',
-    unique_key=('promo_id')
+    unique_key=('promo_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 WITH dim_promo AS (SELECT * FROM {{ ref('stg_sql_server_dbo_promos') }})
@@ -13,7 +14,6 @@ gold_promo AS (
       ,natural_promo_id
 	    ,estado_promo
 	    ,descuento_usd
-      ,_fivetran_deleted
       ,date_load
 
     FROM dim_promo

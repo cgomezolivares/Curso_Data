@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 WITH int_event AS (SELECT * FROM {{ ref('int_event_type_amount_per_user') }})
@@ -23,4 +23,4 @@ joined AS (
     Left join int_coste b
     on a.user_id=b.user_id
 )
-select * from joined
+select * from joined order by 1 asc

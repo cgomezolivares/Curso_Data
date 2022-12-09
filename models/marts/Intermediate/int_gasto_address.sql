@@ -1,6 +1,6 @@
 {{
   config(
-    materialized='table'
+    materialized='view'
   )
 }}
 WITH dim_order AS (SELECT * FROM {{ ref('stg_sql_server_dbo_orders') }})

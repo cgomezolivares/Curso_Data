@@ -1,4 +1,8 @@
-
+{{
+  config(
+    materialized='view',
+  )
+}}
 
 {% set event_types = ["checkout", "package_shipped", "add_to_cart","page_view"] %}
 
@@ -32,6 +36,5 @@ renamed_casted AS (
 
     )
 
-
-
 SELECT * FROM renamed_casted
+
