@@ -79,12 +79,3 @@ snapshots:
         {%- endif -%}
   +target_schema: snapshots
 
-  seeds:
-  +transient: false
-  +target_database: |  
-        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno12
-        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno12
-        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno12
-        {%- else -%} {{target.database}}_bronze_db_alumno12
-        {%- endif -%}
-  +target_schema: seeds

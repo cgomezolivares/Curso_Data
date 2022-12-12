@@ -185,7 +185,7 @@ models:
         description: "Nombre del producto"
         tests:
           - not_null
-      - name: num_inventario
+      - name: inventario
         description: "Stock en inventario del producto"
         tests:
           - not_null
