@@ -14,11 +14,12 @@ models:
         description: "cantidad vendida de cada producto" 
         tests:
           - not_null
-
+          - positive_values
       - name: cantidad_budget
         description: "cantidad de cada producto que estaba presupuestada o prevista"
         tests:
           - not_null
+          - positive_values
       - name: diferencia
         description: "diferencia entre cantidad vendida y cantidad presupuestada"
         tests:
@@ -40,7 +41,7 @@ models:
         tests:
           - not_null
 ##############################################
-    - name: fct_est_producto
+    - name: fct_estadisticas_producto
       description: "Tabla de hecho que relaciona el producto con usuarios, direcciones y cantidades"
       columns:
       - name: order_id
@@ -74,6 +75,10 @@ models:
           - not_null
       - name: Fecha_pedido_utc
         description: "Fecha en la que se actualizó y/o almacenó el pedido"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de actualizacion de un pedido"
         tests:
           - not_null
  

@@ -1,6 +1,8 @@
 {{
   config(
-    materialized='view'
+    materialized='incremental',
+    unique_key=('user_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 WITH int_event AS (SELECT * FROM {{ ref('int_event_type_amount_per_user') }})
@@ -29,5 +31,13 @@ joined AS (
     on a.user_id=c.user_id
     join int_order_items d 
     on c.user_id=d.user_id
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where [total_coste_usd,{{event_type}}_amount] >= (select max([total_coste_usd,{{event_type}}_amount]) from {{ this }})
+
+{% endif %}
+
 )
 select * from joined order by 1 asc

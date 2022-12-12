@@ -1,7 +1,8 @@
-
 {{
   config(
-    materialized='table'
+    materialized='incremental',
+    unique_key=('order_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
@@ -21,6 +22,7 @@ joined AS (
         , c.cantidad
         , c.CANTIDAD*d.Precio_usd as coste_pedido_usd
         , a.fecha_pedido_utc
+        , a.date_load
 
   FROM dim_order a
       inner join dim_user b
@@ -31,7 +33,15 @@ joined AS (
       on c.PRODUCT_ID=d.PRODUCT_ID
       inner join dim_address e
       on b.address_ID=e.address_ID
-    )
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where date_load >= (select max(date_load) from {{ this }})
+
+{% endif %}
+
+)
 
 SELECT * FROM joined
 

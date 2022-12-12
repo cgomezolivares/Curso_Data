@@ -3,7 +3,7 @@
 
    select *
    from {{ model }}
-   where {{ column_name }} < 0
+   where {{ column_name }} <= 0
 
 
 {% endtest %}

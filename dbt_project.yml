@@ -47,8 +47,8 @@ models:
         +schema: google_sheets
       sql_server_dbo:
         +schema: sql_server_dbo
-      core:
-        +target_schema: core
+      seeds:
+        +target_schema: seeds
       
     marts:
       +materialized: table

@@ -1,6 +1,8 @@
 {{
   config(
-    materialized='view',
+    materialized='incremental',
+    unique_key=('user_id'),
+    on_schema_change ='append_new_columns'
   )
 }}
 
@@ -30,11 +32,18 @@ renamed_casted AS (
 
         {% endfor %}
 
+
     FROM stg_events
 
     GROUP BY 1
 
-    )
+{% if is_incremental() %}
 
+  -- this filter will only be applied on an incremental run
+  where {{event_type}}_amount >= (select max({{event_type}}_amount) from {{ this }})
+
+{% endif %}
+
+)
 SELECT * FROM renamed_casted
 

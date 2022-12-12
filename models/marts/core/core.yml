@@ -98,6 +98,7 @@ models:
         description: "Descuento en USD de la promocion"
         tests:
           - not_null
+          - positive_values
       - name: date_load
         description: "fecha de subida del dato de la promocion"
         tests:
@@ -135,6 +136,7 @@ models:
         description: "Coste de envio del pedido"
         tests:
           - not_null
+          - positive_values
       - name: promo_id
         description: "ID interno de la promocion aplicada al pedido"
 
@@ -142,6 +144,7 @@ models:
         description: "Suma de todos los costes y promociones del pedido"
         tests:
           - not_null
+          - positive_values
       - name: fecha_pedido_utc
         description: "Fecha en la que se realizó el pedido"
         tests:
@@ -181,6 +184,7 @@ models:
         description: "Precio en USD del producto"
         tests:
           - not_null
+          - positive_values
       - name: nombre_producto
         description: "Nombre del producto"
         tests:
@@ -234,5 +238,32 @@ models:
 
       - name: date_load
         description: "Fecha de subida del dato sobre el evento"
+        tests:
+          - not_null
+####################################################################
+  - name: dim_order_items
+    description: "Dimension que contiene datos de la cantidad de productos por pedido"
+    columns:
+      - name: order_items_id
+        description: "ID creado para un unico id por fila"
+        test:
+          - unique
+
+      - name: order_id
+        description: "ID interno del pedido"
+        tests:
+
+          - not_null
+      - name: product_id
+        description: "ID interno del producto"
+        tests:
+          - not_null
+      - name: cantidad
+        description: "cantidad de un producto en un pedido"
+        tests:
+          - not_null
+          - positive_values
+      - name: date_load
+        description: "fecha de subida del dato de la promocion"
         tests:
           - not_null
