@@ -3,7 +3,7 @@
 {{
     config(
       target_schema='snapshots',
-      unique_key='order_items_id',
+      unique_key='natural_order_items_id',
       strategy='timestamp',
       updated_at='date_load',
       invalidate_hard_deletes=True,
