@@ -23,6 +23,7 @@ renamed_casted AS (
     SELECT
 
         user_id,
+        
 
         {%- for event_type in event_types   %}
 
@@ -40,7 +41,10 @@ renamed_casted AS (
 {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-  where {{event_type}}_amount >= (select max({{event_type}}_amount) from {{ this }})
+  where CHECKOUT_AMOUNT >= (select max(CHECKOUT_AMOUNT) from {{ this }}) 
+  or PACKAGE_SHIPPED_AMOUNT >= (select max(PACKAGE_SHIPPED_AMOUNT) from {{ this }})
+  or ADD_TO_CART_AMOUNT >= (select max(ADD_TO_CART_AMOUNT) from {{ this }})
+  or PAGE_VIEW_AMOUNT >= (select max(PAGE_VIEW_AMOUNT) from {{ this }})
 
 {% endif %}
 

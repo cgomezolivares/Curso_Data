@@ -26,25 +26,23 @@ joined AS (
     FROM dim_order a
     left join dim_promo B
     ON A.PROMO_ID = B.PROMO_ID
+    {% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+      where coste_total_usd >= (select max(coste_total_usd) from {{ this }})
+
+{% endif %}
 )
 ,
 --select*from joined
 gasto_usuario as (
     SELECT 
       user_id
-      --,address_id
       ,sum(coste_pedido_usd) as total_pedido_usd
       ,sum(coste_envio_usd) as total_envio_usd
       ,sum(descuento_promo_usd) as total_descuento_usd
       ,sum(coste_total_usd) as total_coste_usd
-
-FROM joined group by 1 order by 1 asc
-{% if is_incremental() %}
-
-  -- this filter will only be applied on an incremental run
-  where total_coste_usd >= (select max(total_coste_usd) from {{ this }})
-
-{% endif %}
+    FROM joined group by 1 order by 1 asc
 
 )
 Select * from gasto_usuario

@@ -8,7 +8,7 @@
 WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
     , dim_address AS (SELECT * FROM {{ ref('dim_addresses') }})
     , dim_order as (SELECT * FROM {{ ref('stg_sql_server_dbo_orders') }} )
-    , dim_order_items as (SELECT * FROM {{ ref('stg_sql_server_dbo_order_items') }})
+    , dim_order_items as (SELECT * FROM {{ ref('dim_order_items') }})
     , dim_product as (SELECT * FROM {{ ref('dim_products') }})
     ,
 
@@ -34,13 +34,12 @@ joined AS (
       inner join dim_address e
       on b.address_ID=e.address_ID
 
-{% if is_incremental() %}
+  {% if is_incremental() %}
 
   -- this filter will only be applied on an incremental run
-  where date_load >= (select max(date_load) from {{ this }})
+      where date_load >= (select max(date_load) from {{ this }})
 
-{% endif %}
-
+  {% endif %}
 )
 
 SELECT * FROM joined
