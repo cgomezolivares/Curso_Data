@@ -36,7 +36,7 @@ sources:
             tests:
               - not_null
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
             tests:
               - not_null
 
@@ -117,7 +117,7 @@ sources:
           - name: progress
             description: ""
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
 
       - name: order_items
         description: "tabla que relaciona pedidos y cantidad de productos en el pedido"
@@ -137,7 +137,7 @@ sources:
           - name: _fivetran_deleted
             description: ""
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
 
       - name: orders
         description: "tabla de informacion sobre pedidos de la fuente"
@@ -206,26 +206,26 @@ sources:
           - name: _fivetran_deleted
             description: ""
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
 
       - name: products
         description: ""
         columns:
           - name: product_id
-            description: ""
+            description: "id del producto"
             tests:
               - not_null
               - unique
           - name: price
-            description: ""
+            description: "precio del producto"
             tests:
               - not_null
           - name: name
-            description: ""
+            description: "nombre del producto"
             tests:
               - not_null
           - name: inventory
-            description: ""
+            description: "inventario"
             tests:
               - not_null
           - name: _fivetran_deleted
@@ -233,7 +233,7 @@ sources:
             tests:
               - not_null
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
             tests:
               - not_null
 
@@ -257,7 +257,7 @@ sources:
             tests:
               - not_null
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
             tests:
               - not_null
 
@@ -305,6 +305,6 @@ sources:
             tests:
               - not_null
           - name: _fivetran_synced
-            description: ""
+            description: "fecha sincronizacion"
             tests:
               - not_null

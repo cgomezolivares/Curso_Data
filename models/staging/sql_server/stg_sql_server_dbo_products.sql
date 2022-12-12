@@ -9,7 +9,7 @@ renamed_casted AS (
         ,trim(product_id) as natural_product_id
         ,trim(NAME) as NOMBRE_PRODUCTO
         ,cast(PRICE as number(38,2)) as Precio_usd
-        ,INVENTORY AS NUM_INVENTARIO
+        ,INVENTORY AS INVENTARIO
         ,_fivetran_deleted 
         ,_fivetran_synced AS date_load
     FROM src_products

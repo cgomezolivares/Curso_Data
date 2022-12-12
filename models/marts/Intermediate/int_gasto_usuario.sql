@@ -35,5 +35,5 @@ SELECT
     ,sum(descuento_promo_usd) as total_descuento_usd
     ,sum(coste_total_usd) as total_coste_usd
 
-FROM joined group by 1 
+FROM joined group by 1 order by 1 asc
 

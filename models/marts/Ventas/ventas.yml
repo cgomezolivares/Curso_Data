@@ -1,9 +1,48 @@
 version: 2
 
 models:
-  - name: fct_est_producto
-    description: "Tabla de hecho que relaciona el producto con usuarios, direcciones y cantidades"
-    columns:
+
+    - name: fct_stock
+      description: "Tabla que comprueba las ventas respecto a lo presupuestado y el stock tras las ventas"
+      columns:
+      - name: product_id
+        description: "ID interno de los productos"
+        test: 
+          - not_null
+          - unique
+      - name: cantidad_productos_pedidos
+        description: "cantidad vendida de cada producto" 
+        tests:
+          - not_null
+
+      - name: cantidad_budget
+        description: "cantidad de cada producto que estaba presupuestada o prevista"
+        tests:
+          - not_null
+      - name: diferencia
+        description: "diferencia entre cantidad vendida y cantidad presupuestada"
+        tests:
+          - not_null
+      - name: inventario
+        description: "cantidad de productos en el inventario"
+        tests:
+          - not_null
+      - name: stock_esperado
+        description: "stock previsto entre inventario y presupuestado"
+        tests:
+          - not_null
+      - name: stock_real
+        description: "stock restante al restar las ventas al inventario"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de actualizacion de ventas de un producto"
+        tests:
+          - not_null
+##############################################
+    - name: fct_est_producto
+      description: "Tabla de hecho que relaciona el producto con usuarios, direcciones y cantidades"
+      columns:
       - name: order_id
         description: "ID interno de los pedidos"
         test: 
@@ -37,45 +76,4 @@ models:
         description: "Fecha en la que se actualizó y/o almacenó el pedido"
         tests:
           - not_null
-##############################################
-  - name: fct_estadisticas_usuario
-    description: "Tabla de hecho que reune información numerica asociada a cada usuario"
-
-    columns:
-      - name: user_id
-        description: "ID interno del usuario"
-        tests:
-          - not_null
-      - name: checkout_amount
-        description: "cantidad de veces que un usuario ha pasado por caja para pagar un pedido"
-        tests:
-          - not_null
-      - name: package_shipped_amount
-        description: "cantidad de paquetes que ha recibido el usuario"
-        tests:
-          - not_null
-      - name: add_to_cart_amount
-        description: "cantidad de veces que un usuario ha añadido un producto a su cesta"
-        tests:
-          - not_null
-      - name: page_view_amount
-        description: "cantidad de paginas que ha visitado el usuario en la web"
-        tests:
-          - not_null
-      - name: total_pedido_usd
-        description: "coste total de los productos pedidos por cada usuario"
-
-      - name: total_envio_usd
-        description: "coste total de envios de los pedidos de cada usuario"
-        tests:
-          - not_null
-      - name: total_descuento_usd
-        description: "descuento total que ha recibido un usuario en promociones"
-        tests:
-          - not_null
-      - name: total_coste_usd
-        description: "total del coste de los pedidos que ha realizado un usuario"
-        tests:
-          - not_null
-          
-##################################################
+ 

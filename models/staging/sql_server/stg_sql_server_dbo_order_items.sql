@@ -8,7 +8,7 @@ renamed_casted AS (
         -- ids
          md5(ORDER_ID) as order_id
         ,md5(PRODUCT_ID) as product_id
-        -- strings
+        -- number
         ,cast(QUANTITY as number(38,2)) AS CANTIDAD
         --timestamps
         ,_fivetran_deleted

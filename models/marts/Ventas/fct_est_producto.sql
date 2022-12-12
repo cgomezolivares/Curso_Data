@@ -7,7 +7,7 @@
 WITH dim_user AS (SELECT * FROM {{ ref('dim_users') }})
     , dim_address AS (SELECT * FROM {{ ref('dim_addresses') }})
     , dim_order as (SELECT * FROM {{ ref('stg_sql_server_dbo_orders') }} )
-    , dim_order_items as (SELECT * FROM {{ ref('int_order_items') }})
+    , dim_order_items as (SELECT * FROM {{ ref('stg_sql_server_dbo_order_items') }})
     , dim_product as (SELECT * FROM {{ ref('dim_products') }})
     ,
 
