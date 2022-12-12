@@ -1,7 +1,7 @@
 {{
   config(
     materialized='incremental',
-    unique_key=('order_id'),
+    unique_key=['order_id','product_id'],
     on_schema_change ='append_new_columns'
   )
 }}
@@ -34,13 +34,13 @@ joined AS (
       inner join dim_address e
       on b.address_ID=e.address_ID
 
-  {% if is_incremental() %}
-
-  -- this filter will only be applied on an incremental run
-      where date_load >= (select max(date_load) from {{ this }})
-
-  {% endif %}
 )
 
 SELECT * FROM joined
 
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  having date_load >= (select max(date_load) from {{ this }})
+
+{% endif %}
