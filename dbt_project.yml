@@ -47,6 +47,8 @@ models:
         +schema: google_sheets
       sql_server_dbo:
         +schema: sql_server_dbo
+      core:
+        +target_schema: core
       
     marts:
       +materialized: table
@@ -58,6 +60,13 @@ models:
         {%- endif -%}
       core:
         +schema: core
+      intermediate:
+        +schema: intermediate
+      marketing:
+        +schema: marketing
+      ventas:
+        +schema: ventas
+
         
 snapshots:
   +sql_header: "alter session set timezone = 'Europe/Madrid';alter session set week_start = 7;"
@@ -69,3 +78,13 @@ snapshots:
         {%- else -%} {{target.database}}_gold_db_alumno12
         {%- endif -%}
   +target_schema: snapshots
+
+  seeds:
+  +transient: false
+  +target_database: |  
+        {%- if  target.name == 'user_dev' -%} dev_bronze_db_alumno12
+        {%- elif target.name == 'ci' -%} dev_bronze_db_alumno12
+        {%- elif target.name == 'pro'-%} pro_bronze_db_alumno12
+        {%- else -%} {{target.database}}_bronze_db_alumno12
+        {%- endif -%}
+  +target_schema: seeds

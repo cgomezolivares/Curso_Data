@@ -8,7 +8,7 @@
 
 WITH src_city AS (
     SELECT * 
-    FROM {{ ref('Ciudades') }}
+    FROM {{ ref('ciudades') }}
     ),
 
 renamed_casted AS (

@@ -130,6 +130,7 @@ models:
         description: "Coste de los productos del pedido"
         tests:
           - not_null
+          - positive_values
       - name: coste_envio_usd
         description: "Coste de envio del pedido"
         tests:
