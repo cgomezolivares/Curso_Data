@@ -1,0 +1,113 @@
+version: 2
+
+models:
+
+  - name: int_budget
+    description: "Tabla intermedia que relaciona budget con los productos comprados"
+    columns:
+      - name: PRODUCT_ID
+        description: "ID interno de los productos"
+        test: 
+          - not_null
+      - name: CANTIDAD_PRODUCTOS_PEDIDOS
+        description: "Cantidad de pedidos realizados" 
+        tests:
+          - not_null
+
+      - name: CANTIDAD_BUDGET
+        description: "Total de cada producto presupuestada"
+        tests:
+          - not_null
+      - name: diferencia
+        description: "diferencia entre cantidad vendida y cantidad presupuestada"
+        tests:
+          - not_null
+      - name: inventario
+        description: "cantidad de productos en el inventario"
+        tests:
+          - not_null
+      - name: stock_esperado
+        description: "stock previsto entre inventario y presupuestado"
+        tests:
+          - not_null
+      - name: stock_real
+        description: "stock restante al restar las ventas al inventario"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de actualizacion de ventas de un producto"
+        tests:
+          - not_null
+
+##############################################
+  - name: int_event_type_amount_per_user
+    description: "Tabla que calcula la cantidad de eventos de cada tipo por usuario"
+
+    columns:
+    - name: user_id
+      description: "ID interno del usuario"
+      tests:
+          - unique
+          - not_null
+    - name: checkout_amount
+      description: "cantidad de veces que un usuario ha pasado por caja para pagar un pedido"
+      tests:
+          - not_null
+    - name: package_shipped_amount
+      description: "cantidad de paquetes que ha recibido el usuario"
+      tests:
+          - not_null
+    - name: add_to_cart_amount
+      description: "cantidad de veces que un usuario ha añadido un producto a su cesta"
+      tests:
+          - not_null
+    - name: page_view_amount
+      description: "cantidad de paginas que ha visitado el usuario en la web"
+      tests:
+          - not_null
+##########################################################################################
+
+  - name: int_product_per_user
+    description: "Tabla intermediate que calcula la cantidad total de productos comprados por usuario"
+
+    columns:
+    - name: user_id
+      description: "ID interno del usuario"
+      tests:
+          - not_null
+
+
+    - name: cantidad_producto
+      description: "suma total de productos adquiridos"
+      tests:
+          - not_null
+
+
+###################################################################################
+  - name: int_gasto_usuario
+    description: "Tabla que calcula la cantidad de eventos de cada tipo por usuario"
+
+    columns:
+    - name: user_id
+      description: "ID interno del usuario"
+      tests:
+          - unique
+          - not_null
+    - name: total_pedido_usd
+      description: "coste total de los productos pedidos por cada usuario"
+      tests:
+          - not_null
+    - name: total_envio_usd
+      description: "coste total de envios de los pedidos de cada usuario"
+      tests:
+          - not_null
+    - name: total_descuento_usd
+      description: "descuento total que ha recibido un usuario en promociones"
+      tests:
+          - not_null
+    - name: total_coste_usd
+      description: "total del coste de los pedidos que ha realizado un usuario"
+      tests:
+          - not_null
+##################################################
+ 

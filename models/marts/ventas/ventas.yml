@@ -1,0 +1,84 @@
+version: 2
+
+models:
+
+    - name: fct_stock
+      description: "Tabla que comprueba las ventas respecto a lo presupuestado y el stock tras las ventas"
+      columns:
+      - name: product_id
+        description: "ID interno de los productos"
+        test: 
+          - not_null
+          - unique
+      - name: cantidad_productos_pedidos
+        description: "cantidad vendida de cada producto" 
+        tests:
+          - not_null
+          - positive_values
+      - name: cantidad_budget
+        description: "cantidad de cada producto que estaba presupuestada o prevista"
+        tests:
+          - not_null
+          - positive_values
+      - name: diferencia
+        description: "diferencia entre cantidad vendida y cantidad presupuestada"
+        tests:
+          - not_null
+      - name: inventario
+        description: "cantidad de productos en el inventario"
+        tests:
+          - not_null
+      - name: stock_esperado
+        description: "stock previsto entre inventario y presupuestado"
+        tests:
+          - not_null
+      - name: stock_real
+        description: "stock restante al restar las ventas al inventario"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de actualizacion de ventas de un producto"
+        tests:
+          - not_null
+##############################################
+    - name: fct_estadisticas_producto
+      description: "Tabla de hecho que relaciona el producto con usuarios, direcciones y cantidades"
+      columns:
+      - name: order_id
+        description: "ID interno de los pedidos"
+        test: 
+          - not_null
+      - name: user_id
+        description: "ID interno del usuario" 
+        tests:
+          - not_null
+
+      - name: ciudad
+        description: "Ciudad del usuario que realiza un pedido"
+        tests:
+          - not_null
+      - name: estado
+        description: "Estado al que pertenece el usuario"
+        tests:
+          - not_null
+      - name: Product_id
+        description: "id interno del producto"
+        tests:
+          - not_null
+      - name: cantidad
+        description: "Cantidad de un producto en un pedido"
+        tests:
+          - not_null
+      - name: coste_pedido_usd
+        description: "Suma del coste de los productos de un pedido"
+        tests:
+          - not_null
+      - name: Fecha_pedido_utc
+        description: "Fecha en la que se actualizó y/o almacenó el pedido"
+        tests:
+          - not_null
+      - name: date_load
+        description: "fecha de actualizacion de un pedido"
+        tests:
+          - not_null
+ 
